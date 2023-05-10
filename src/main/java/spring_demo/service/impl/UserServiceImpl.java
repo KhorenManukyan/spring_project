@@ -1,11 +1,9 @@
 package spring_demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_demo.model.User;
 import spring_demo.repository.UserRepository;
-import spring_demo.service.AccountService;
 import spring_demo.service.UserService;
 
 import java.util.List;
@@ -14,13 +12,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private AccountService accountService;
-    private final UserRepository userRepository;
 
-//    public UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
+    private final UserRepository userRepository;
 
     @Override
     public void save(User user) {

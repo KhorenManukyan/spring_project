@@ -1,7 +1,6 @@
 package spring_demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import spring_demo.model.User;
 import spring_demo.service.UserService;
@@ -10,21 +9,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private  UserService userService;
+
+    private final UserService userService;
 
     @PostMapping
     public void save(@RequestBody User user) {
         userService.save(user);
     }
 
-
     @PutMapping("/{id}")
     public void update(@RequestBody User user, @PathVariable int id) {
         userService.update(user, id);
     }
-
 
 
     @GetMapping("/byid/{id}")
@@ -37,13 +35,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping( "/{id}")
+    @DeleteMapping("/{id}")
     public User deleteById(@PathVariable int id) {
         return userService.deleteById(id);
     }
 
     @DeleteMapping("/delete")
-    public void deleteAll(){
+    public void deleteAll() {
         userService.deleteAll();
     }
 }
