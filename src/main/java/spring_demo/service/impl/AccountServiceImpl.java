@@ -28,5 +28,4 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
         accountRepository.save(otherAccount);
     }
-
 }

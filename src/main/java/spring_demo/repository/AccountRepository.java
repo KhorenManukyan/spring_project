@@ -5,5 +5,4 @@ import spring_demo.model.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-
 }

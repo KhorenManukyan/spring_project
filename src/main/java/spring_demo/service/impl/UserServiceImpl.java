@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user, int id) {
+    public User update(User user, int id) {
 
         Optional<User> userById = userRepository.findById(id);
         if (userById.isPresent()) {
@@ -35,14 +35,15 @@ public class UserServiceImpl implements UserService {
             if (user.getEmail() != null) {
                 updatedUser.setEmail(user.getEmail());
             }
-            userRepository.save(updatedUser);
+            return userRepository.save(updatedUser);
+        } else {
+            return null;
         }
-
     }
 
     @Override
-    public User getById(int id) {
-        return userRepository.findById(id).orElse(null);
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElseGet(() -> null);
     }
 
     @Override
@@ -61,8 +62,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteById(int id) {
-        User user = getById(id);
+    public User deleteUserById(int id) {
+        User user = getUserById(id);
         if (user != null) {
             userRepository.delete(user);
         }
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAllUsers() {
         userRepository.deleteAll();
     }
 }

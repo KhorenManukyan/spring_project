@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+
+<body>
+<h1>User List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+    </tr>
+    <tr th:each="user:${users}">
+        <td>
+            <a th:text="${user.id}" th:href="'/users/' + ${user.id}"></a>
+        </td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <a th:href="'/users/edit/' + ${user.id}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Edit user
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+        </td>
+        <td>
+            <a th:href="@{/users/delete/{id}(id=${user.id})}"
+               onclick="return confirm('Are you sure you want to delete this user?')">Delete this row </a>
+        </td>
+    </tr>
+    <hr>
+</table>
+<br>
+<hr>
+<a href="/users/save">Add New User &nbsp &nbsp &nbsp &nbsp &nbsp</a>
+<a href="/users/deleteAll">Delete all Users</a>
+<hr>
+
+</body>
+</html>

@@ -5,16 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import spring_demo.model.User;
-import spring_demo.service.UserService;
+import spring_demo.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserControllerUsedUserRepository {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @GetMapping("/hello")
     public String hello(ModelMap modelMap) {
@@ -24,8 +25,9 @@ public class UserController {
 
     @GetMapping
     public String getAllUsers(ModelMap modelMap) {
-        List<User> users = userService.getAllUsers();
+        List<User> users = userRepository.findAll();
         modelMap.addAttribute("users", users);
+//        modelMap.addAttribute("user", new User());
         return "userList";
     }
 
@@ -36,20 +38,28 @@ public class UserController {
 
     @PostMapping
     public String save(@ModelAttribute User user) {
-        userService.save(user);
+        userRepository.save(user);
         return "redirect:/users";
     }
 
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute User user, int id) {
-        User updatedUser = userService.update(user, id);
-        userService.save(updatedUser);
+        User existingUser = userRepository.findById(user.getId()).orElse(null);
+        if (existingUser != null) {
+            // update user properties here
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPassword(user.getPassword());
+            userRepository.save(existingUser);
+        }
+
         return "redirect:/users";
     }
 
     @GetMapping("/edit/{id}")
     public String edite(ModelMap modelMap, @PathVariable int id) {
-        User user = userService.getUserById(id);
+        User user = userRepository.findById(id).orElse(null);
         if (user != null) {
             modelMap.addAttribute("user", user);
             return "editUser";
@@ -60,15 +70,16 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable int id, ModelMap modelMap) {
-        User user = userService.getUserById(id);
-        modelMap.addAttribute("user", user);
+        Optional<User> byId = userRepository.findById(id);
+        byId.ifPresent(user -> modelMap.addAttribute("user", user));
+
         return "user";
     }
 
     @GetMapping("delete/{id}")
     public String deleteUserById(@PathVariable int id, ModelMap modelMap) {
-        userService.deleteUserById(id);
-        modelMap.addAttribute("users", userService.getAllUsers());
+        userRepository.deleteById(id);
+        modelMap.addAttribute("users", userRepository.findAll());
         modelMap.addAttribute("success", true);
 
         return "userList";
@@ -76,7 +87,7 @@ public class UserController {
 
     @GetMapping("/deleteAll")
     public String deleteAllUsers() {
-        userService.deleteAllUsers();
+        userRepository.deleteAll();
         return "redirect:/users";
     }
 }
