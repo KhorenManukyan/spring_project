@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/userListCss.css">
+</head>
+<body>
+<h1>Registration Page</h1>
+<form action="/users-register" method="post">
+    <div class="user-style">
+        <label for="name">Username:</label>
+        <input type="text" id="name" name="name">
+    </div>
+    <div class="user-style">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+
+    <p>Permissions:</p>
+    <label for="add">Add User :</label>
+    <input type="checkbox" id="add" name="permissions[]" value="add"><br>
+    <label for="delete">Delete User :</label>
+    <input type="checkbox" id="delete" name="permissions[]" value="delete"><br>
+    <label for="edit">Edit User :</label>
+    <input type="checkbox" id="edit" name="permissions[]" value="edit"><br>
+    <label for="archive">Archive User :</label>
+    <input type="checkbox" id="archive" name="permissions[]" value="archive"><br><br>
+    <button type="submit">Register</button>
+
+</form>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <style>
+        .permission-label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .permission-checkbox {
+            display: none;
+        }
+
+        .permission-checkbox:checked + .permission-square {
+            background-color: green;
+        }
+
+        .permission-square {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>User Registration</h1>
+<form action="/users-register" method="post">
+    <div class="row">
+        name
+        <input type="text" name="name">
+    </div>
+    <div class="row">
+        password
+        <input type="text" name="password">
+    </div>
+    <div class="row button">
+        <label class="permission-label">
+            <input type="checkbox" name="permissions[]" value="add" class="permission-checkbox">
+            <span class="permission-square"></span>Add Task
+        </label>
+        <label class="permission-label">
+            <input type="checkbox" name="permissions[]" value="delete" class="permission-checkbox">
+            <span class="permission-square"></span>Delete Task
+        </label>
+        <label class="permission-label">
+            <input type="checkbox" name="permissions[]" value="edit" class="permission-checkbox">
+            <span class="permission-square"></span>Edit Task
+        </label>
+        <label class="permission-label">
+            <input type="checkbox" name="permissions[]" value="archive" class="permission-checkbox">
+            <span class="permission-square"></span>Archive Task
+        </label><br><br>
+
+        <input type="submit" value="Register">
+    </div>
+</form>
+</body>
+</html>-->

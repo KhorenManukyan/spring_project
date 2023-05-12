@@ -14,8 +14,6 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
         <th>Password</th>
         <th></th>
         <th></th>
@@ -23,10 +21,9 @@
     <tr th:each="user:${users}">
         <td>
             <a th:text="${user.id}" th:href="'/users/' + ${user.id}"></a>
+            <a th:text="${user.id}"></a>
         </td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
         <td th:text="${user.password}"></td>
         <td class="edit">
             <a th:href="'/users/edit/' + ${user.id}">Edit user</a>
