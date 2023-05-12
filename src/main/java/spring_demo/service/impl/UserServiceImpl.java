@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
         Optional<User> userById = userRepository.findById(id);
         if (userById.isPresent()) {
             User updatedUser = userById.get();
-            if (user.getFirstName() != null) {
-                updatedUser.setFirstName(user.getFirstName());
+            if (user.getUsername() != null) {
+                updatedUser.setUsername(user.getUsername());
             }
             if (user.getLastName() != null) {
                 updatedUser.setLastName(user.getLastName());
