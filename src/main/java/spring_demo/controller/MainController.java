@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+//    @GetMapping("/")
+//    public String main() {
+//        return "redirect:/users";
+//    }
+
     @GetMapping("/")
-    public String main() {
-        return "redirect:/users";
+    public String homePage(){
+        return "redirect:/users-register";
     }
 
 }
