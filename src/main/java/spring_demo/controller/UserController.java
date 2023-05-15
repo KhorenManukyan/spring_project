@@ -1,18 +1,13 @@
 package spring_demo.controller;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import spring_demo.dto.UserDTO;
 import spring_demo.model.User;
-import spring_demo.model.enums.ChoseSection;
 import spring_demo.service.UserService;
 
 import java.util.List;
-
-import static spring_demo.model.enums.ChoseSection.CREATEUSER;
 
 @Controller
 @RequestMapping("/users")
@@ -24,52 +19,33 @@ public class UserController {
     @GetMapping("/hello")
     public String hello(ModelMap modelMap) {
         modelMap.addAttribute("message", "Wooowwwww");
-        return "users";
+        return "create-user";
     }
 
-    @GetMapping
+    @GetMapping("/getUsersList")
     public String getAllUsers(ModelMap modelMap) {
         List<User> users = userService.getAllUsers();
         modelMap.addAttribute("users", users);
         return "userList";
     }
 
-    @PostMapping("/choseSection")
-    public String addUser(@ModelAttribute User user) {
-        userService.save(user);
-        return "redirect:/users/users";
-    }
-
-//    @GetMapping("/choseSection")
-//    public String createNewUser() {
-//        return "createUser";
-//    }
-
     @PostMapping("/createUser")
     public String save(@ModelAttribute User user) {
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/users/getUsersList";
+    }
+
+    @GetMapping("/createUser")
+    public String showCreateUserPage() {
+        return "create-user";
     }
 
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute User user, int id) {
         User updatedUser = userService.update(user, id);
         userService.save(updatedUser);
-        return "redirect:/users";
+        return "redirect:/users/getUsersList";
     }
-
-//    @PostMapping("/chosedPlace")
-//    public String chosedFromSections(ModelMap modelMap){
-//
-//                ChoseSection choseSection =
-//        switch (ChoseSection){
-//            case CREATEUSER -> modelMap.addAttribute("createUser", createUser)
-//            case    GETUSERSLIST,
-//            case    HRPAGE,
-//            case    CALLPAGE
-//        }
-//
-//    }
 
     @GetMapping("/edit/{id}")
     public String edite(ModelMap modelMap, @PathVariable int id) {
@@ -101,7 +77,7 @@ public class UserController {
     @GetMapping("/deleteAll")
     public String deleteAllUsers() {
         userService.deleteAllUsers();
-        return "redirect:/users";
+        return "redirect:/users/getUsersList";
     }
 
     @GetMapping("/login")
@@ -111,21 +87,37 @@ public class UserController {
 
     @PostMapping("/login")
     public String submitLoginForm(@ModelAttribute User user, ModelMap modelMap) {
-//        if (user.getUsername().equals("1") && user.getPassword().equals("1")){
-//            modelMap.addAttribute("user", user);
+        if (user.getUsername().equals("1") && user.getPassword().equals("1")) {
+            modelMap.addAttribute("user", user);
             return "redirect:/users/choseSection";
-//        } else {
-//            modelMap.addAttribute("error", "Invalid username or password");
-//        }
-//        return "login";
+        } else {
+            modelMap.addAttribute("error", "Invalid username or password");
+        }
+        return "login";
     }
 
     @GetMapping("/home")
-    public String showHomePage(){
+    public String showHomePage() {
         return "home";
     }
-//    @GetMapping("/hr/home")
-//    public String showHomePage(){
-//        return "hr/home";
-//    }
+
+    @GetMapping("/choseSection")
+    public String createNewUser() {
+        return "choseSection";
+    }
+
+    @GetMapping("/hrPage")
+    public String showHrPage() {
+        return "hr";
+    }
+
+    @GetMapping("/callPage")
+    public String showCallCenterPage() {
+        return "call";
+    }
+
+    @GetMapping("/logout")
+    public String exit() {
+        return "login";
+    }
 }

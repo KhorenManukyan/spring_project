@@ -17,7 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        userRepository.save(user);
+        if (user.getId() == 0) {
+            userRepository.save(user);
+        }
     }
 
     @Override
@@ -34,6 +36,9 @@ public class UserServiceImpl implements UserService {
             }
             if (user.getEmail() != null) {
                 updatedUser.setEmail(user.getEmail());
+            }
+            if (user.getPassword() != null) {
+                updatedUser.setPassword(user.getPassword());
             }
             return userRepository.save(updatedUser);
         } else {

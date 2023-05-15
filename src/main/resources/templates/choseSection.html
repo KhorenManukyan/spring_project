@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Choose Section</title>
     <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
 </head>
 <body>
-<div class="container">
-    <h1>Choose a Section</h1>
-    <ul>
-        <li>
-            <a href="/createUser">Create user in DB</a>
-        </li>
-        <li>
-            <a href="/getUsersList">Get all users list</a>
-        </li>
-        <li>
-            <a href="/hrPage">Go to HR page</a>
-        </li>
-        <li>
-            <a href="/callPage">Go to Call center page</a>
-        </li>
-    </ul>
+<div class="section">
+    <div class="container">
+        <h1>Choose a Section</h1>
+        <ul>
+            <li>
+                <a href="/users/createUser">Create new user in DB</a>
+            </li>
+            <li>
+                <a href="/users/getUsersList">Get all users list</a>
+            </li>
+            <li>
+                <a href="/users/hrPage">HR page</a>
+            </li>
+            <li>
+                <a href="/users/callPage">SALES</a>
+            </li>
+        </ul>
+    </div>
+    <a href="/users/logout" class="exit-button"><h4>Exit</h4></a>
 </div>
 </body>
 </html>

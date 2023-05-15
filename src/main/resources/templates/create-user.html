@@ -4,19 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
 </head>
 
 <body>
 <h1>Add User</h1>
 
-<form method="post" action="/users">
+<form method="post" action="/users/createUser">
 
-    <label>First Name: <input type="text" name="username"/></label><br/>
+    <label>First Name: <input type="text" name="username" required/></label><br/>
     <label>Last Name: <input type="text" name="lastName"/></label><br/>
     <label>Email: <input type="email" name="email"/></label><br/>
     <label>Password: <input type="password" name="password"/></label><br/>
     <input type="submit" value="Save"/>
 </form>
+<div>
+    <br>
+    <br>
+    <a href="/users/choseSection"><h4>Return to Choose a Section page</h4></a>
+</div>
+<a href="/users/logout" class="exit-button">Exit</a>
 </body>
-
 </html>

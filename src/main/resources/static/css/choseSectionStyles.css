@@ -1,6 +1,10 @@
+body{
+    background-color: beige;
+}
+
 .container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 65px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
     text-align: center;
@@ -39,4 +43,24 @@ a {
 a:hover {
     background-color: #333;
     color: #fff;
+}
+
+
+.exit-button {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 120px;
+    background: aqua;
+    text-align: center;
+}
+
+.login-position {
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+}
+
+.login-body {
+    background-color: blanchedalmond;
 }

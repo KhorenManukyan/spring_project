@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
 </head>
-<body>
-<h1>Login</h1>
+<body class="login-body">
+<h1 class="login-position">Login</h1>
 <form action="/users/login" method="post">
     <div>
-        <label>Username:
+        <label class="login-position">Username:
             <input type="text" name="username">
         </label>
     </div>
     <div>
-        <label>Password:
+        <label class="login-position">Password:
             <input type="password" name="password">
         </label>
     </div>
-    <div>
-        <button type="submit">Submit</button>
+    <p th:if="${error}" th:text="${error}" style="color: red;"  class="login-position"></p>
+    <div class="login-position">
+        <button type="submit">Login</button>
     </div>
 </form>
 </body>
