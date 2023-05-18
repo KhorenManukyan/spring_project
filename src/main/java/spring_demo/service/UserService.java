@@ -1,8 +1,10 @@
 package spring_demo.service;
 
 import spring_demo.model.User;
+import spring_demo.model.enums.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     void save(User user);
@@ -23,4 +25,7 @@ public interface UserService {
 
     void deleteAllUsers();
 
+    Optional<User> findByName(String name);
+
+    List<User> findAllByCategory(Category category);
 }

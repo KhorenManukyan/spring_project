@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import spring_demo.dto.UserRegDTO;
 import spring_demo.model.User;
+import spring_demo.model.enums.Category;
 import spring_demo.service.UserService;
 
 import java.util.List;
@@ -30,7 +32,13 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    public String save(@ModelAttribute User user) {
+    public String save(@ModelAttribute UserRegDTO userRegDTO) {
+        User user = new User();
+        user.setName(userRegDTO.getName());
+        user.setPassword(userRegDTO.getPassword());
+        String upperCase = userRegDTO.getCategory().toUpperCase();
+        System.err.println(upperCase);
+        user.setCategory(Category.valueOf(upperCase));
         userService.save(user);
         return "redirect:/users/getUsersList";
     }
@@ -87,7 +95,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String submitLoginForm(@ModelAttribute User user, ModelMap modelMap) {
-        if (user.getUsername().equals("1") && user.getPassword().equals("1")) {
+        if (user.getName().equals("1") && user.getPassword().equals("1")) {
             modelMap.addAttribute("user", user);
             return "redirect:/users/choseSection";
         } else {
@@ -106,14 +114,9 @@ public class UserController {
         return "choseSection";
     }
 
-    @GetMapping("/hrPage")
-    public String showHrPage() {
-        return "hr";
-    }
-
     @GetMapping("/callPage")
     public String showCallCenterPage() {
-        return "call";
+        return "call-center";
     }
 
     @GetMapping("/logout")

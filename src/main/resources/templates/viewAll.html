@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View All</title>
+    <link rel="stylesheet" type="text/css" href="/css/userListCss.css">
+    <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
+</head>
+<body>
+<h1>In this table we can add only SALES users</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Day</th>
+        <th>Time</th>
+    </tr>
+    <tr th:each="call:${calls}">
+        <td>
+            <a th:text="${call.id}" th:href="'/users/' + ${call.id}"></a>
+        </td>
+        <td th:text="${call.user.name}"></td>
+        <td th:text="${call.date}"></td>
+        <td th:text="${call.time}"></td>
+        <td class="edit">
+            <a th:href="'/call/edit/' + ${call.id}">Edit Call</a>
+        </td>
+    </tr>
+</table>
+<div class="a-block">
+    <div>
+        <br>
+        <a class="a-block-min-width" href="/call/createCall"><h4>Add call</h4></a>
+    </div>
+    <div>
+        <br>
+        <a class="a-block-min-width" href="/users/getUsersList"><h4>Show users list</h4></a>
+    </div>
+    <div>
+        <br>
+        <a class="a-block-min-width" href="/call/getAll"><h4>Show callers list</h4></a>
+    </div>
+    <div>
+        <br>
+        <a class="a-block-min-width" href="/users/callPage"><h4>Return to SALES Page!</h4></a>
+    </div>
+    <div>
+        <br>
+        <a class="a-block-max-width" href="/users/choseSection"><h4>Return to Choose a Section page</h4></a>
+    </div>
+</div>
+
+<div class="container create-section">
+    <div class="wrapper">
+        <div class="title form-group"><span>AVAILABLES</span></div>
+        <form action="/call/check" method="post">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="date" class="form-group"/>
+            <br/>
+            <button type="submit" class="create-section">Submit</button>
+        </form>
+    </div>
+</div>
+<table>
+    <tr th:each="available:${availabilities}">
+        <td th:text="${available.time } + ' - ' +${available.percentage} + ' %'"></td>
+
+    </tr>
+</table>
+
+<a href="/users/logout" class="exit-button">Exit</a>
+</body>
+</html>

@@ -5,25 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring_demo.model.enums.Category;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @Entity
-@Table(name = "user")
-public class User {
+public class CallCenterUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private String password;
-    @Enumerated(EnumType.STRING)
-    private Category category;
-    @OneToMany(mappedBy = "user")
-    private List<CallCenterUser> callCenterUserList;
+    private LocalDate date;
+    private LocalTime time;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 
 }

@@ -3,6 +3,7 @@ package spring_demo.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import spring_demo.model.User;
+import spring_demo.model.enums.Category;
 import spring_demo.repository.UserRepository;
 import spring_demo.service.UserService;
 
@@ -17,9 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        if (user.getId() == 0) {
-            userRepository.save(user);
-        }
+        userRepository.save(user);
     }
 
     @Override
@@ -28,14 +27,8 @@ public class UserServiceImpl implements UserService {
         Optional<User> userById = userRepository.findById(id);
         if (userById.isPresent()) {
             User updatedUser = userById.get();
-            if (user.getUsername() != null) {
-                updatedUser.setUsername(user.getUsername());
-            }
-            if (user.getLastName() != null) {
-                updatedUser.setLastName(user.getLastName());
-            }
-            if (user.getEmail() != null) {
-                updatedUser.setEmail(user.getEmail());
+            if (user.getName() != null) {
+                updatedUser.setName(user.getName());
             }
             if (user.getPassword() != null) {
                 updatedUser.setPassword(user.getPassword());
@@ -86,5 +79,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteAllUsers() {
         userRepository.deleteAll();
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    @Override
+    public List<User> findAllByCategory(Category category) {
+        return userRepository.findAllByCategory(category);
     }
 }
