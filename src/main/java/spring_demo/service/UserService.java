@@ -1,6 +1,7 @@
 package spring_demo.service;
 
 import spring_demo.model.User;
+import spring_demo.model.enums.Category;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +9,9 @@ import java.util.Optional;
 public interface UserService {
     void save(User user);
 
-    void update(User user, int id);
+    User update(User user, int id);
 
-    User getById(int id);
+    User getUserById(int id);
 
     List<User> getAllUsers();
 
@@ -18,10 +19,13 @@ public interface UserService {
 
     long count();
 
-    User deleteById(int id);
+    User deleteUserById(int id);
 
     User delete(User user);
 
-    void deleteAll();
+    void deleteAllUsers();
 
+    Optional<User> findByName(String name);
+
+    List<User> findAllByCategory(Category category);
 }

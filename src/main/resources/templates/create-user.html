@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/userListCss.css"/>
+</head>
+
+<body>
+<h1>Add User</h1>
+
+<form method="post" action="/users/createUser">
+    <div class="form-group">
+        <label>Name: <input type="text" name="name" required/></label><br/>
+    </div>
+    <div class="form-group">
+        <label>Category:
+            <select name="category" required>
+                <option value="">-- Select Category --</option>
+                <option value="HR">HR</option>
+                <option value="SALES">SALES</option>
+                <option value="LEAD">LEAD</option>
+            </select>
+        </label><br/>
+    </div>
+    <div class="form-group">
+        <label>Password: <input type="password" name="password"/></label><br/>
+    </div>
+    <input type="submit" value="Save" class="create-section"/>
+</form>
+<div>
+    <br>
+    <br>
+    <a class="a-block-max-width" href="/users/choseSection"><h4>Return to Choose a Section page</h4></a>
+</div>
+<a href="/users/logout" class="exit-button">Exit</a>
+</body>
+</html>

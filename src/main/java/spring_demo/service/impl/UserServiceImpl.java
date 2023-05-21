@@ -1,11 +1,10 @@
 package spring_demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_demo.model.User;
+import spring_demo.model.enums.Category;
 import spring_demo.repository.UserRepository;
-import spring_demo.service.AccountService;
 import spring_demo.service.UserService;
 
 import java.util.List;
@@ -14,13 +13,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private AccountService accountService;
-    private final UserRepository userRepository;
 
-//    public UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
+    private final UserRepository userRepository;
 
     @Override
     public void save(User user) {
@@ -28,28 +22,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user, int id) {
+    public User update(User user, int id) {
 
         Optional<User> userById = userRepository.findById(id);
         if (userById.isPresent()) {
             User updatedUser = userById.get();
-            if (user.getFirstName() != null) {
-                updatedUser.setFirstName(user.getFirstName());
+            if (user.getName() != null) {
+                updatedUser.setName(user.getName());
             }
-            if (user.getLastName() != null) {
-                updatedUser.setLastName(user.getLastName());
+            if (user.getPassword() != null) {
+                updatedUser.setPassword(user.getPassword());
             }
-            if (user.getEmail() != null) {
-                updatedUser.setEmail(user.getEmail());
-            }
-            userRepository.save(updatedUser);
+            return userRepository.save(updatedUser);
+        } else {
+            return null;
         }
-
     }
 
     @Override
-    public User getById(int id) {
-        return userRepository.findById(id).orElse(null);
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElseGet(() -> null);
     }
 
     @Override
@@ -68,8 +60,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteById(int id) {
-        User user = getById(id);
+    public User deleteUserById(int id) {
+        User user = getUserById(id);
         if (user != null) {
             userRepository.delete(user);
         }
@@ -85,7 +77,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAllUsers() {
         userRepository.deleteAll();
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    @Override
+    public List<User> findAllByCategory(Category category) {
+        return userRepository.findAllByCategory(category);
     }
 }

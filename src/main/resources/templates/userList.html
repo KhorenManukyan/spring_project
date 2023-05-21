@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" type="text/css" href="/css/userListCss.css">
+    <link rel="stylesheet" type="text/css" href="/css/choseSectionStyles.css"/>
+</head>
+
+<body>
+<h1>User List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Category</th>
+        <th>Password</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="user:${users}">
+        <td>
+            <a th:text="${user.id}" th:href="'/users/' + ${user.id}"></a>
+        </td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.category}"></td>
+        <td th:text="${user.password}"></td>
+        <td class="edit">
+            <a th:href="'/users/edit/' + ${user.id}">Edit user</a>
+        </td>
+        <td class="delete">
+            <a th:href="@{/users/delete/{id}(id=${user.id})}"
+               onclick="return confirm('Are you sure you want to delete this user?')">Delete this row </a>
+        </td>
+    </tr>
+    <tr>
+        <th><a href="/users/createUser">Add New User &nbsp &nbsp &nbsp &nbsp &nbsp</a></th>
+        <th class="delete"><a href="/users/deleteAll">Delete all Users</a></th>
+    </tr>
+</table>
+<div class="a-block">
+    <div>
+        <br>
+        <br>
+        <a class="a-block-max-width" href="/call/getAll"><h4>Go SALES view all page, to chose percentage</h4></a>
+    </div>
+    <div>
+        <br>
+        <br>
+        <a class="a-block-max-width" href="/users/choseSection"><h4>Return to Choose a Section page</h4></a>
+    </div>
+</div>
+<a href="/users/logout" class="exit-button">Exit</a>
+
+</body>
+</html>

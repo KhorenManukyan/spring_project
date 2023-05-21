@@ -1,0 +1,69 @@
+table {
+    width: 80%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.edit {
+    background-color: aqua;
+}
+
+.delete {
+    background-color: red;
+}
+
+.space {
+    margin-left: 30px;
+    margin-bottom: 5px;
+}
+
+.user-style {
+    padding: 8px;
+    margin-bottom: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.a-block-min-width {
+    text-align: center;
+    padding: unset;
+    max-width: 300px;
+    margin-left: 10px;
+    margin-right: 100px;
+    background-color: cadetblue;
+}
+
+.a-block-max-width {
+    text-align: center;
+    padding: unset;
+    max-width: 500px;
+    margin-left: 10px;
+    margin-right: 100px;
+    background-color: cadetblue;
+}
+
+.a-block {
+    display: flex;
+}
+
+.create-section {
+    font-size: 28px;
+    background-color: coral;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
